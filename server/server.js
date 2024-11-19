@@ -37,7 +37,6 @@ app.get('/callback', async (req, res) => {
         console.log('Token de acceso recibido:', accessToken);
 
         // Redirige al usuario a una nueva página con el token de acceso como parámetro
-        // Ejemplo de redirección a dashboard.html
         res.redirect(`/dashboard/dashboard.html?access_token=${accessToken}`);
 
     } catch (error) {
@@ -48,31 +47,30 @@ app.get('/callback', async (req, res) => {
 
 // Ruta para obtener las fotos desde Unsplash
 app.get('/photos', async (req, res) => {
-    const accessToken = req.query.access_token; // Obtener el token de acceso
-    const query = req.query.query || ''; // Si hay consulta, la obtenemos, si no, es una búsqueda general
-    const perPage = 30;  // Número de fotos por solicitud
-    const page = req.query.page || 1; // Página por defecto es 1
-
-    if (!accessToken) {
-        return res.status(400).send('Token de acceso no disponible');
-    }
+    const query = req.query.query || ''; // Búsqueda o general
+    const perPage = 30; // Número fijo de fotos por solicitud
+    const page = req.query.page || 1; // Página predeterminada es 1
 
     try {
+        // Construir la URL de acuerdo a si es una búsqueda o no
         const url = query 
-            ? `https://api.unsplash.com/search/photos?query=${query}&client_id=${process.env.CLIENT_ID}&page=${page}&per_page=${perPage}` // Búsqueda
-            : `https://api.unsplash.com/photos?client_id=${process.env.CLIENT_ID}&page=${page}&per_page=${perPage}`; // Fotos generales
-        
+            ? `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${process.env.CLIENT_ID}&page=${page}&per_page=${perPage}` // Para búsquedas
+            : `https://api.unsplash.com/photos?client_id=${process.env.CLIENT_ID}&page=${page}&per_page=${perPage}`; // General
+
+        // Hacer la solicitud a Unsplash
         const response = await axios.get(url);
-        console.log(response.data);  // Verifica si se están obteniendo las fotos
 
-        const photos = query ? response.data.results : response.data; // Si hay búsqueda, obtenemos 'results'
+        // Extraer las fotos del resultado
+        const photos = query ? response.data.results : response.data;
 
-        res.json(photos); // Devuelve las fotos obtenidas
+        // Enviar las fotos al cliente
+        res.json(photos);
     } catch (error) {
         console.error('Error al obtener fotos:', error.response ? error.response.data : error.message);
         res.status(500).send('Error al obtener fotos');
     }
 });
+
 
 // Ruta para obtener fotos favoritas desde el almacenamiento
 app.get('/favorite-photos', async (req, res) => {
@@ -99,18 +97,27 @@ app.get('/favorite-photos', async (req, res) => {
 });
 
 app.get('/search', async (req, res) => {
-    const query = req.query.query;  // Obtener la consulta
+    const query = req.query.query || '';  // Obtener la consulta o dejarla vacía
+    const perPage = 30;  // Número de resultados por página
+    const page = req.query.page || 1; // Página por defecto
+
     try {
-        const response = await axios.get(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${process.env.CLIENT_ID}`);
+        // Construir la URL de búsqueda con los parámetros
+        const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${process.env.CLIENT_ID}&per_page=${perPage}&page=${page}`;
+
+        // Realizar la solicitud a Unsplash
+        const response = await axios.get(url);
+
+        // Obtener las fotos de los resultados
         const photos = response.data.results;
-        res.json(photos); // Enviar las fotos al frontend
+
+        // Enviar las fotos al frontend
+        res.json(photos);
     } catch (error) {
-        console.error('Error al buscar fotos:', error);
+        console.error('Error al buscar fotos:', error.response ? error.response.data : error.message);
         res.status(500).send('Error al realizar la búsqueda');
     }
 });
-
-
 
 app.listen(port, () => {
     console.log(`Servidor en http://localhost:${port}`);

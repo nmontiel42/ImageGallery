@@ -3,33 +3,40 @@ let favoritePhotos = JSON.parse(localStorage.getItem('favoritePhotos')) || [];
 let currentSearchQuery = ''; // Variable global para almacenar la consulta actual
 
 // Función para obtener fotos desde el servidor
-async function fetchPhotos(query = '') {
+async function fetchPhotos(query = '')
+{
     try {
         const url = query ? `/search?query=${encodeURIComponent(query)}&access_token=${accessToken}` : `/photos?access_token=${accessToken}`;
         const response = await fetch(url); // Cambiar a URL de búsqueda si hay consulta
         const photos = await response.json();
         displayPhotos(photos);
-    } catch (error) {
+    }
+    catch (error)
+    {
         console.error('Error al obtener las fotos:', error);
     }
 }
 
 // Llama a la función fetchPhotos para cargar las fotos cuando se carga la página
-window.onload = () => {
+window.onload = () =>
+{
     fetchPhotos();
     updateActiveTab(); // Actualiza la pestaña activa al cargar la página
 };
 
-function displayPhotos(photos) {
+function displayPhotos(photos)
+{
     const gallery = document.getElementById('gallery');
     gallery.innerHTML = '';
 
-    if (photos.length === 0) {
+    if (photos.length === 0)
+    {
         gallery.innerHTML = '<p>No photos were found.</p>';
         return;
     }
 
-    photos.forEach(photo => {
+    photos.forEach(photo =>
+    {
         const isFavorite = favoritePhotos.includes(photo.id); // Verifica si está en favoritos
         const photoItem = document.createElement('div');
         photoItem.classList.add('photo-item');
@@ -43,14 +50,12 @@ function displayPhotos(photos) {
     });
 }
 
-function toggleFavorite(photoId) {
-    if (favoritePhotos.includes(photoId)) {
-        // Eliminar de favoritos
+function toggleFavorite(photoId)
+{
+    if (favoritePhotos.includes(photoId))
         favoritePhotos = favoritePhotos.filter(id => id !== photoId);
-    } else {
-        // Agregar a favoritos
+    else
         favoritePhotos.push(photoId);
-    }
     // Actualizar localStorage
     localStorage.setItem('favoritePhotos', JSON.stringify(favoritePhotos));
     // Recargar las fotos basadas en la búsqueda actual
@@ -58,17 +63,20 @@ function toggleFavorite(photoId) {
 }
 
 // Manejar la búsqueda
-document.getElementById('search-form').addEventListener('submit', function (event) {
+document.getElementById('search-form').addEventListener('submit', function (event)
+{
     event.preventDefault(); // Prevenir que se recargue la página
     const query = document.getElementById('search-query').value.trim();
-    if (query) {
+    if (query)
+    {
         currentSearchQuery = query; // Guardar la consulta actual
         fetchPhotos(query); // Llamar a la función de búsqueda
     }
 });
 
 // Función para actualizar la pestaña activa
-function updateActiveTab() {
+function updateActiveTab()
+{
     const path = window.location.pathname;
     if (path.includes('dashboard')) {
         document.getElementById('galleryTab').classList.add('active');

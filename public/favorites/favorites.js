@@ -7,7 +7,8 @@ if (favoritePhotos.length === 0) {
 }
 
 // Función para cargar las fotos favoritas
-function displayFavoritePhotos(favoritePhotos) {
+function displayFavoritePhotos(favoritePhotos)
+{
     const gallery = document.getElementById('gallery');
     gallery.innerHTML = ''; // Limpiar la galería antes de mostrar las fotos favoritas
 
@@ -15,7 +16,8 @@ function displayFavoritePhotos(favoritePhotos) {
     fetch(`/favorite-photos?favoritePhotos=${JSON.stringify(favoritePhotos)}`)
         .then(response => response.json())
         .then(photos => {
-            photos.forEach(photo => {
+            photos.forEach(photo =>
+            {
                 const photoItem = document.createElement('div');
                 photoItem.classList.add('photo-item');
                 photoItem.innerHTML = `
@@ -33,7 +35,8 @@ function displayFavoritePhotos(favoritePhotos) {
 }
 
 // Función para alternar favoritos
-function toggleFavorite(photoId) {
+function toggleFavorite(photoId)
+{
     let favoritePhotos = JSON.parse(localStorage.getItem('favoritePhotos')) || [];
     if (favoritePhotos.includes(photoId)) {
         favoritePhotos = favoritePhotos.filter(id => id !== photoId);
@@ -45,7 +48,8 @@ function toggleFavorite(photoId) {
 }
 
 // Función para actualizar la pestaña activa
-function updateActiveTab() {
+function updateActiveTab()
+{
     const path = window.location.pathname;
     if (path.includes('dashboard')) {
         document.getElementById('galleryTab').classList.add('active');
