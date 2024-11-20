@@ -101,7 +101,8 @@ app.get('/search', async (req, res) => {
     const perPage = 30;  // Número de resultados por página
     const page = req.query.page || 1; // Página por defecto
 
-    try {
+    try
+    {
         // Construir la URL de búsqueda con los parámetros
         const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&client_id=${process.env.CLIENT_ID}&per_page=${perPage}&page=${page}`;
 
@@ -113,7 +114,9 @@ app.get('/search', async (req, res) => {
 
         // Enviar las fotos al frontend
         res.json(photos);
-    } catch (error) {
+    }
+    catch (error) 
+    {
         console.error('Error al buscar fotos:', error.response ? error.response.data : error.message);
         res.status(500).send('Error al realizar la búsqueda');
     }

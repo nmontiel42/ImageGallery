@@ -182,7 +182,6 @@ header h1 {
     text-decoration: none;
 }
 
-/* Media Queries for responsiveness */
 @media screen and (max-width: 768px) {
     header {
         flex-direction: row;
@@ -212,14 +211,14 @@ header h1 {
     }
 
     .search-bar {
-        width: 100%; /* Ajustamos el ancho para centrarse */
+        width: 100%;
         margin-top: 20px;
-        justify-content: center; /* Centra los elementos dentro de la barra */
+        justify-content: center;
     }
 
     .search-bar input {
-        width: 150px; /* Reducimos aún más el tamaño de la barra de búsqueda */
-        max-width: 150px; /* Limita el tamaño máximo */
+        width: 150px;
+        max-width: 150px;
     }
 
     .search-bar button {
@@ -233,8 +232,8 @@ header h1 {
     }
 
     .photo-item {
-        margin-left: 5px; /* Separación en el lado izquierdo de cada imagen */
-        margin-right: 5px; /* Separación en el lado derecho de cada imagen */
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }
 
@@ -245,12 +244,12 @@ header h1 {
 
     .search-bar input {
         width: 100%;
-        max-width: 150px; /* Limita el tamaño máximo para pantallas pequeñas */
+        max-width: 150px;
     }
 
     .photo-item {
-        margin-left: 5px; /* Separación en el lado izquierdo de cada imagen */
-        margin-right: 5px; /* Separación en el lado derecho de cada imagen */
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     .photo-gallery {

@@ -1,6 +1,6 @@
 const accessToken = new URLSearchParams(window.location.search).get('access_token');
 let favoritePhotos = JSON.parse(localStorage.getItem('favoritePhotos')) || [];
-let currentSearchQuery = ''; // Variable global para almacenar la consulta actual
+let currentSearchQuery = '';
 
 // Función para obtener fotos desde el servidor
 async function fetchPhotos(query = '')

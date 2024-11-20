@@ -32,13 +32,9 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
     position: fixed;
-    /* Fijar el encabezado */
     top: 0;
-    /* Pegado a la parte superior */
     left: 0;
-    /* Alineado a la izquierda */
     z-index: 1000;
-    /* Asegura que el encabezado esté por encima de otros elementos */
 }
 
 header h1 {
@@ -171,14 +167,14 @@ header h1 {
     }
 
     .search-bar {
-        width: 100%; /* Ajustamos el ancho para centrarse */
+        width: 100%;
         margin-top: 20px;
-        justify-content: center; /* Centra los elementos dentro de la barra */
+        justify-content: center;
     }
 
     .search-bar input {
-        width: 150px; /* Reducimos aún más el tamaño de la barra de búsqueda */
-        max-width: 150px; /* Limita el tamaño máximo */
+        width: 150px;
+        max-width: 150px;
     }
 
     .search-bar button {
@@ -192,8 +188,8 @@ header h1 {
     }
 
     .photo-item {
-        margin-left: 5px; /* Separación en el lado izquierdo de cada imagen */
-        margin-right: 5px; /* Separación en el lado derecho de cada imagen */
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }
 
@@ -204,12 +200,12 @@ header h1 {
 
     .search-bar input {
         width: 100%;
-        max-width: 150px; /* Limita el tamaño máximo para pantallas pequeñas */
+        max-width: 150px;
     }
 
     .photo-item {
-        margin-left: 5px; /* Separación en el lado izquierdo de cada imagen */
-        margin-right: 5px; /* Separación en el lado derecho de cada imagen */
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     .photo-gallery {
