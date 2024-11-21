@@ -7,4 +7,4 @@ stop and delete containers and images
 Stop and delete containers and image, then build and lift the containers again
 
 # HOW IT WORKS:
-[Screencast from 11-20-2024 10:45:26 AM.webm](https://github.com/user-attachments/assets/42a6333b-1c16-49f9-86f8-d89abdac118a)
+[ImageGallery.webm](https://github.com/user-attachments/assets/031b6224-250a-4671-91a5-3a4b187b5c6a)
